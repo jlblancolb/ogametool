@@ -33,7 +33,7 @@ for ($aux=1;$aux<=$num;$aux++){
 }
 
 /* Consultas de selección que devuelven un conjunto de resultados */
-$resultado = mysqli_query($link, "SELECT Planetas.id,nombre,Metal,Cristal,Deuterio,Robots,Hangar,Laboratorio,Nanos,Lanzamisiles,LaseresP,LaseresG,Gauss,Ionico,Plasma,CupulaP,CupulaG,MisilesB,Satelites FROM Planetas,Recursos,Instalaciones,FlotaDef where Planetas.id = Recursos.id AND Planetas.id = Instalaciones.id AND Planetas.id = FlotaDef.id;");
+$resultado = mysqli_query($link, "SELECT Planetas.Temp,Planetas.id,nombre,Metal,Cristal,Deuterio,Robots,Hangar,Laboratorio,Nanos,Lanzamisiles,LaseresP,LaseresG,Gauss,Ionico,Plasma,CupulaP,CupulaG,MisilesB,Satelites FROM Planetas,Recursos,Instalaciones,FlotaDef where Planetas.id = Recursos.id AND Planetas.id = Instalaciones.id AND Planetas.id = FlotaDef.id;");
 ?>
 <html>
 	<head>
@@ -56,7 +56,8 @@ $resultado = mysqli_query($link, "SELECT Planetas.id,nombre,Metal,Cristal,Deuter
 		  <table class="table" style="background-color:rgba(240, 240, 240, 1);border-style: solid;border-width: 1px;">
 			<thead>
 			  <tr>
-			    <th>#</th>
+			    <th style="width:26px;">#</th>
+			    <th style="width:59px;">Temp</th>
 			    <th style="color:red;">Nombre planeta</th>
 			    <th style="color:grey;">Metal</th>
 			    <th style="color:blue;">Cristal</th>
@@ -73,6 +74,7 @@ $resultado = mysqli_query($link, "SELECT Planetas.id,nombre,Metal,Cristal,Deuter
 			    <?php while($row = mysqli_fetch_assoc($resultado)){?>
 			    <?php echo '<input type="text" name="'.$row['id'].'" style="visibility:collapse;position: absolute">';?>
 			    <th scope="row" style="color:red;"><?php echo $row['id'];?></th>
+				<th scope="row" style="color:black;"><?php echo $row['Temp'].'º';?></th>
                 <th scope="row"><?php echo $row['nombre'];?></th>
 			    <td><?php echo '<input style="width:24px" type="text" name="Metal'.$row['id'].'" value="'.$row['Metal'].'">';?></td>
 			    <td><?php echo '<input style="width:24px" type="text" name="Cristal'.$row['id'].'" value="'.$row['Cristal'].'">';?></td>

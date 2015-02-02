@@ -93,6 +93,11 @@ $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Plane
 				  <a href="#" class="btn btn-default" role="button">Producción de metal: <strong style="color:purple"><?=number_format($metalt,0,",",".");?></strong> por hora</a>
 				  <a href="#" class="btn btn-default" role="button">Producción de cristal: <strong style="color:blue"><?=number_format($cristalt,0,",",".");?></strong> por hora</a>
 				  <a href="#" class="btn btn-default" role="button">Producción de deuterio: <strong style="color:red"><?=number_format($deuteriot,0,",",".");?></strong> por hora</a>
+				</div>
+				<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
+				  <a href="#" class="btn btn-default" role="button">Producción de metal: <strong style="color:purple"><?=number_format(24*$metalt,0,",",".");?></strong> por día</a>
+				  <a href="#" class="btn btn-default" role="button">Producción de cristal: <strong style="color:blue"><?=number_format(24*$cristalt,0,",",".");?></strong> por día</a>
+				  <a href="#" class="btn btn-default" role="button">Producción de deuterio: <strong style="color:red"><?=number_format(24*$deuteriot,0,",",".");?></strong> por día</a>
 				</div></br>
 			<button type="submit" class="btn btn-default">Actualizar</button>
 		</form>

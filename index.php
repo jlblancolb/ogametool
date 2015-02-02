@@ -33,7 +33,7 @@ for ($aux=1;$aux<=$num;$aux++){
 }
 
 /* Consultas de selección que devuelven un conjunto de resultados */
-$resultado = mysqli_query($link, "SELECT Planetas.Temp,Planetas.id,nombre,Metal,Cristal,Deuterio,Robots,Hangar,Laboratorio,Nanos,Lanzamisiles,LaseresP,LaseresG,Gauss,Ionico,Plasma,CupulaP,CupulaG,MisilesB,Satelites FROM Planetas,Recursos,Instalaciones,FlotaDef where Planetas.id = Recursos.id AND Planetas.id = Instalaciones.id AND Planetas.id = FlotaDef.id;");
+$resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Planetas.id,nombre,Metal,Cristal,Deuterio,Robots,Hangar,Laboratorio,Nanos,Lanzamisiles,LaseresP,LaseresG,Gauss,Ionico,Plasma,CupulaP,CupulaG,MisilesB,Satelites FROM Planetas,Recursos,Instalaciones,FlotaDef where Planetas.id = Recursos.id AND Planetas.id = Instalaciones.id AND Planetas.id = FlotaDef.id;");
 ?>
 <html>
 	<head>
@@ -57,7 +57,7 @@ $resultado = mysqli_query($link, "SELECT Planetas.Temp,Planetas.id,nombre,Metal,
 			<thead>
 			  <tr>
 			    <th style="width:26px;">#</th>
-			    <th style="width:59px;">Temp</th>
+			    <th style="width:59px;">TempMed</th>
 			    <th style="color:red;">Nombre planeta</th>
 			    <th style="color:grey;">Metal</th>
 			    <th style="color:blue;">Cristal</th>
@@ -74,7 +74,7 @@ $resultado = mysqli_query($link, "SELECT Planetas.Temp,Planetas.id,nombre,Metal,
 			    <?php while($row = mysqli_fetch_assoc($resultado)){?>
 			    <?php echo '<input type="text" name="'.$row['id'].'" style="visibility:collapse;position: absolute">';?>
 			    <th scope="row" style="color:red;"><?php echo $row['id'];?></th>
-				<th scope="row" style="color:black;"><?php echo $row['Temp'].'º';?></th>
+				<th scope="row" style="color:black;"><?php echo (($row['TempMax']+$row['TempMin'])/2).'º';?></th>
                 <th scope="row"><?php echo $row['nombre'];?></th>
 			    <td><?php echo '<input style="width:24px" type="text" name="Metal'.$row['id'].'" value="'.$row['Metal'].'">';?></td>
 			    <td><?php echo '<input style="width:24px" type="text" name="Cristal'.$row['id'].'" value="'.$row['Cristal'].'">';?></td>
@@ -85,14 +85,14 @@ $resultado = mysqli_query($link, "SELECT Planetas.Temp,Planetas.id,nombre,Metal,
 			    <td><?php echo '<input style="width:24px" type="text" name="Nanos'.$row['id'].'" value="'.$row['Nanos'].'">';?></td>
 					<?php $op = pow(1.1,(int)$row['Metal']);$metalres = 150*(int)$row['Metal']*$op;$metalt = $metalt+$metalres;?>
 					<?php $op = pow(1.1,(int)$row['Cristal']);$cristalres = 75*(int)$row['Cristal']*$op;$cristalt = $cristalt+$cristalres;?>
-					<?php $op = pow(1.1,(int)$row['Deuterio']);$deuteriores = 20*(int)$row['Deuterio']*$op;$deuteriot = $deuteriot+$deuteriores;?>
+					<?php $op = pow(1.1,(int)$row['Deuterio']);$deuteriores = 50*(int)$row['Deuterio']*$op*(1.36-0.004*((($row['TempMax']+$row['TempMin'])/2)));$deuteriot = $deuteriot+$deuteriores;?>
 			  </tr> <?php } ?>
 			</tbody>
 		    </table>
 				<div class="btn-group btn-group-justified" role="group" aria-label="Justified button group">
-				  <a href="#" class="btn btn-default" role="button">Producción de metal: <strong style="color:purple"><?=number_format($metalt,2,",",".");?></strong> por hora</a>
-				  <a href="#" class="btn btn-default" role="button">Producción de cristal: <strong style="color:blue"><?=number_format($cristalt,2,",",".");?></strong> por hora</a>
-				  <a href="#" class="btn btn-default" role="button">Producción de deuterio: <strong style="color:red">NaH</strong> por hora</a>
+				  <a href="#" class="btn btn-default" role="button">Producción de metal: <strong style="color:purple"><?=number_format($metalt,0,",",".");?></strong> por hora</a>
+				  <a href="#" class="btn btn-default" role="button">Producción de cristal: <strong style="color:blue"><?=number_format($cristalt,0,",",".");?></strong> por hora</a>
+				  <a href="#" class="btn btn-default" role="button">Producción de deuterio: <strong style="color:red"><?=number_format($deuteriot,0,",",".");?></strong> por hora</a>
 				</div></br>
 			<button type="submit" class="btn btn-default">Actualizar</button>
 		</form>

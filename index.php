@@ -31,6 +31,9 @@ for ($aux=1;$aux<=$num;$aux++){
 	}
 	</script>';};
 }
+/*  Plasma technology */
+(int)$pltechm = 1.08;
+(int)$pltechc = 1.0528;
 
 /* Consultas de selección que devuelven un conjunto de resultados */
 $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Planetas.id,nombre,Metal,Cristal,Deuterio,Robots,Hangar,Laboratorio,Nanos,Lanzamisiles,LaseresP,LaseresG,Gauss,Ionico,Plasma,CupulaP,CupulaG,MisilesB,Satelites FROM Planetas,Recursos,Instalaciones,FlotaDef where Planetas.id = Recursos.id AND Planetas.id = Instalaciones.id AND Planetas.id = FlotaDef.id;");
@@ -84,7 +87,7 @@ $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Plane
 			    <td><?php echo '<input style="width:24px" type="text" name="Laboratorio'.$row['id'].'" value="'.$row['Laboratorio'].'">';?></td>
 			    <td><?php echo '<input style="width:24px" type="text" name="Nanos'.$row['id'].'" value="'.$row['Nanos'].'">';?></td>
 					<?php $op = pow(1.1,(int)$row['Metal']);$metalres = 150*(int)$row['Metal']*$op;$metalt = $metalt+$metalres;?>
-					<?php $op = pow(1.1,(int)$row['Cristal']);$cristalres = 75*(int)$row['Cristal']*$op;$cristalt = $cristalt+$cristalres;?>
+					<?php $op = pow(1.1,(int)$row['Cristal']);$cristalres = 100*(int)$row['Cristal']*$op;$cristalt = $cristalt+$cristalres;?>
 					<?php $op = pow(1.1,(int)$row['Deuterio']);$deuteriores = 50*(int)$row['Deuterio']*$op*(1.36-0.004*((($row['TempMax']+$row['TempMin'])/2)));$deuteriot = $deuteriot+$deuteriores;?>
 			  </tr> <?php } ?>
 			</tbody>
@@ -206,104 +209,104 @@ $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Plane
 				  <div class="modal-dialog modal-sm">
 					<div class="modal-content">
 					  <!-- Order defenses information -->
-		<ol class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
-				<?php //Query Lanzamisiles 
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Lanzamisiles
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY Lanzamisiles DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más lanzamisiles: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['Lanzamisiles'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query Laseres 
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, LaseresP
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY LaseresP DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más láseres pequeños: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['LaseresP'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query Laseres G
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, LaseresG
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY LaseresG DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más láseres grandes: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['LaseresG'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query Gauss
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Gauss
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY Gauss DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más gauss: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['Gauss'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query Ionico
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Ionico
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY Ionico DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más ionicos: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['Ionico'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query Plasma
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Plasma
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY Plasma DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más plasmas: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['Plasma'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query misiles
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, MisilesB
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY MisilesB DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más misiles: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['MisilesB'];?></a></strong></li>
-                <li class="divider"></li>
-				<?php //Query Satelites
-				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Satelites
-						  FROM FlotaDef, Planetas
-						  WHERE Planetas.id = FlotaDef.id
-						  ORDER BY Satelites DESC 
-						  LIMIT 1';
-				$numb = mysqli_query($link,$consul);
-				$tot = mysqli_fetch_assoc($numb);
-				?>
-                <li><a tabindex="-1" href="#">Planeta con más satélites: <strong><?=$tot['nombre'];?></strong></a></li>
-				<li><a tabindex="-1" href="#"><strong><?=$tot['Satelites'];?></a></strong></li>
-                <li class="divider"></li>
-              </ol>
+				<ol class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
+						<?php //Query Lanzamisiles 
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, Lanzamisiles
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY Lanzamisiles DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más lanzamisiles: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['Lanzamisiles'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query Laseres 
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, LaseresP
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY LaseresP DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más láseres pequeños: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['LaseresP'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query Laseres G
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, LaseresG
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY LaseresG DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más láseres grandes: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['LaseresG'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query Gauss
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, Gauss
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY Gauss DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más gauss: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['Gauss'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query Ionico
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, Ionico
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY Ionico DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más ionicos: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['Ionico'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query Plasma
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, Plasma
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY Plasma DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más plasmas: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['Plasma'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query misiles
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, MisilesB
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY MisilesB DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más misiles: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['MisilesB'];?></a></strong></li>
+						<li class="divider"></li>
+						<?php //Query Satelites
+						$consul= 'SELECT Planetas.nombre, FlotaDef.id, Satelites
+								  FROM FlotaDef, Planetas
+								  WHERE Planetas.id = FlotaDef.id
+								  ORDER BY Satelites DESC 
+								  LIMIT 1';
+						$numb = mysqli_query($link,$consul);
+						$tot = mysqli_fetch_assoc($numb);
+						?>
+						<li><a tabindex="-1" href="#">Planeta con más satélites: <strong><?=$tot['nombre'];?></strong></a></li>
+						<li><a tabindex="-1" href="#"><strong><?=$tot['Satelites'];?></a></strong></li>
+						<li class="divider"></li>
+					  </ol>
 					</div>
 				  </div>
 				</div>

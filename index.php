@@ -198,21 +198,117 @@ $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Plane
 			</tbody>
 		</table></br>
 		<button id="btnaddD" class="btn btn-default" onclick="addDef()" >Actualizar defensas</button>
-		<br><br>
-		<!-- Order defenses information -->
+		
+			  <!-- Small modal -->
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-sm">Más información</button>
+
+				<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				  <div class="modal-dialog modal-sm">
+					<div class="modal-content">
+					  <!-- Order defenses information -->
 		<ol class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display: block; position: static; margin-bottom: 5px; *width: 180px;">
-                <li><a tabindex="-1" href="#">Planeta con más lanzamisiles:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más láseres pequeños:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más láseres grandes:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más gauss:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más ionicos:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más plasmas:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más misiles:</a></li>
-                <li><a tabindex="-1" href="#">Planeta con más satélites:</a></li>
+				<?php //Query Lanzamisiles 
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Lanzamisiles
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY Lanzamisiles DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más lanzamisiles: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['Lanzamisiles'];?></a></strong></li>
                 <li class="divider"></li>
-                <li><a tabindex="-1" href="#">Separated link</a></li>
+				<?php //Query Laseres 
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, LaseresP
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY LaseresP DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más láseres pequeños: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['LaseresP'];?></a></strong></li>
+                <li class="divider"></li>
+				<?php //Query Laseres G
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, LaseresG
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY LaseresG DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más láseres grandes: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['LaseresG'];?></a></strong></li>
+                <li class="divider"></li>
+				<?php //Query Gauss
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Gauss
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY Gauss DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más gauss: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['Gauss'];?></a></strong></li>
+                <li class="divider"></li>
+				<?php //Query Ionico
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Ionico
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY Ionico DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más ionicos: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['Ionico'];?></a></strong></li>
+                <li class="divider"></li>
+				<?php //Query Plasma
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Plasma
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY Plasma DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más plasmas: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['Plasma'];?></a></strong></li>
+                <li class="divider"></li>
+				<?php //Query misiles
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, MisilesB
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY MisilesB DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más misiles: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['MisilesB'];?></a></strong></li>
+                <li class="divider"></li>
+				<?php //Query Satelites
+				$consul= 'SELECT Planetas.nombre, FlotaDef.id, Satelites
+						  FROM FlotaDef, Planetas
+						  WHERE Planetas.id = FlotaDef.id
+						  ORDER BY Satelites DESC 
+						  LIMIT 1';
+				$numb = mysqli_query($link,$consul);
+				$tot = mysqli_fetch_assoc($numb);
+				?>
+                <li><a tabindex="-1" href="#">Planeta con más satélites: <strong><?=$tot['nombre'];?></strong></a></li>
+				<li><a tabindex="-1" href="#"><strong><?=$tot['Satelites'];?></a></strong></li>
+                <li class="divider"></li>
               </ol>
+					</div>
+				  </div>
+				</div>
 		<!-- Add defense form start -->
+		<br><br>
 		<form id="adddef" action="adddef.php" method="post" target="_blank">
 		<table class="table" style="background-color:rgba(240, 240, 240, 1);border-style: solid;border-width: 1px;">
 		<thead>

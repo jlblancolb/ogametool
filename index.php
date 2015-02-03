@@ -363,6 +363,8 @@ $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Plane
 			<th>Robots</th>
 			<th>Hangar</th>
 			<th>Laboratorio</th>
+			<th>TempMax</th>
+			<th>TempMin</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -374,6 +376,8 @@ $resultado = mysqli_query($link, "SELECT Planetas.TempMax,Planetas.TempMin,Plane
 			<td><input type="number" style="width:40px" name="NRobots" required></td>
 			<td><input type="number" style="width:40px" name="NHangar" required></td>
 			<td><input type="number" style="width:40px" name="NLaboratorio" required></td>
+			<td><input type="number" style="width:70px" name="TempMax" required></td>
+			<td><input type="number" style="width:70px" name="TempMin" required></td>
 			</tr>
 		</tbody>
 		</table>

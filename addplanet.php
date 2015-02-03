@@ -18,10 +18,10 @@ if (mysqli_connect_errno()){
 /* Query to insert into table */
 $query1 = 'INSERT INTO Recursos (Metal,Cristal,Deuterio)
 		   VALUES ("'.$_POST['NMetal'].'","'.$_POST['NCristal'].'","'.$_POST['NDeuterio'].'")';
-$query2 = 'INSERT INTO Instalaciones (Robots,Hangar,Laboratorio)
-		   VALUES ("'.$_POST['NRobots'].'","'.$_POST['NHangar'].'","'.$_POST['NLaboratorio'].'")';
-$query3 = 'INSERT INTO Planetas (Nombre)
-		   VALUES ("'.$_POST['NNombre'].'")';
+$query2 = 'INSERT INTO Instalaciones (Robots,Hangar,Laboratorio,Nanos)
+		   VALUES ("'.$_POST['NRobots'].'","'.$_POST['NHangar'].'","'.$_POST['NLaboratorio'].'",0)';
+$query3 = 'INSERT INTO Planetas (Nombre,TempMax,TempMin)
+		   VALUES ("'.$_POST['NNombre'].'")'.$_POST['TempMax'].'","'.$_POST['TempMin'].'")';
 $query4 = 'INSERT INTO FlotaDef (Lanzamisiles,LaseresP,LaseresG,Gauss,Ionico,Plasma,CupulaP,CupulaG,MisilesB,Satelites)
 		   VALUES (0,0,0,0,0,0,0,0,0,0)';
 		   
